@@ -12,25 +12,26 @@ ENV TL_PACKAGES="adjustbox algorithmicx algorithms caption cases chngcntr collec
 ENV PATH=${PATH}:${TL_BIN}
 WORKDIR ${HOME}
 
-COPY texlive.profile ${TL_PROFILE_PATH}
-
 # install necessary packages
 # thank sjtug & tuna
 RUN sed -i 's/http:\/\/archive.ubuntu.com/http:\/\/mirror.sjtu.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y git \
-    perl \
-    wget \
-    libfontconfig \
-    python3 \
-    python3-pip
+        perl \
+        wget \
+        libfontconfig \
+        python3 \
+        python3-pip && \
+    rm -rf /var/lib/apt/lists/*
 RUN pip install Pygments -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # install TeXLive
+COPY texlive.profile ${TL_PROFILE_PATH}
 RUN wget ${TL_MIRROR}/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tar -xzf install-tl-unx.tar.gz && \
     cd install-tl-20* && \
     ./install-tl --profile ${TL_PROFILE_PATH}/texlive.profile && \
+    rm -rf install-tl-* && \
     tlmgr option repository ${TL_MIRROR}/systems/texlive/tlnet && \
     tlmgr install ${TL_PACKAGES} && \
     tlmgr update --self --all --no-auto-install && \

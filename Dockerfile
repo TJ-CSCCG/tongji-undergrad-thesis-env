@@ -3,6 +3,8 @@ LABEL organization="TJ-CSCCG"
 LABEL maintainer="skyleaworlder"
 LABEL version="v1"
 
+# WRITE_ENV is folder to compile document
+#   by compile function, all contents will be copied here
 ENV WRITE_ENV=/opt/tongji-undergrad-thesis
 ENV TL_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/CTAN
 ENV TL_PROFILE_PATH=/tmp
@@ -26,7 +28,7 @@ RUN apt-get install -y git \
     apt-get clean
 RUN pip install Pygments -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# install TeXLive
+# download & install TeXLive
 COPY texlive.profile ${TL_PROFILE_PATH}
 RUN wget ${TL_MIRROR}/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tar -xzf install-tl-unx.tar.gz && \
@@ -38,7 +40,7 @@ RUN wget ${TL_MIRROR}/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tlmgr update --self --all --no-auto-install && \
     tlmgr path add
 
-# create folder to compile document
+# create folder where compile function builds output file
 RUN mkdir tongji-undergrad-thesis
 WORKDIR ${WRITE_ENV}
 

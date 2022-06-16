@@ -1,4 +1,6 @@
 FROM ubuntu:latest
+
+# Docker image: tut-env:v1 
 LABEL organization="TJ-CSCCG"
 LABEL maintainer="skyleaworlder"
 LABEL version="v1"

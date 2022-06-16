@@ -19,7 +19,6 @@ COPY texlive.profile ${TL_PROFILE_PATH}
 RUN sed -i 's/http:\/\/archive.ubuntu.com/http:\/\/mirror.sjtu.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y git \
-    python3.8 \
     perl \
     wget \
     libfontconfig \

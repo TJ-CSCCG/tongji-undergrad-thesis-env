@@ -4,3 +4,4 @@ services:
     container_name: tut-env
     image: tut-env:v1
     build: .
+    tty: true

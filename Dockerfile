@@ -3,14 +3,14 @@ LABEL organization="TJ-CSCCG"
 LABEL maintainer="skyleaworlder"
 LABEL version="v1"
 
-ENV HOME=/opt
+ENV WRITE_ENV=/opt/tongji-undergrad-thesis
 ENV TL_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/CTAN
 ENV TL_PROFILE_PATH=/tmp
 ENV TL_DIR=/tmp/texlive
 ENV TL_BIN=${TL_DIR}/bin/x86_64-linux
 ENV TL_PACKAGES="adjustbox algorithmicx algorithms caption cases chngcntr collectbox ctex enumitem environ extarrows fancybox fancyhdr float lastpage latexmk multirow needspace rsfs setspace subfigure tcolorbox texcount texliveonfly titling tocloft trimspaces ucs xcolor xecjk zhnumber gbt7714 natbib chinese-jfm catchfile fancyvrb framed fvextra ifplatform lineno minted pdftexcmds upquote xstring txfonts times biber biblatex bibtex dvips gsftopk"
 ENV PATH=${PATH}:${TL_BIN}
-WORKDIR ${HOME}
+WORKDIR /opt
 
 # install necessary packages
 # thank sjtug & tuna
@@ -37,9 +37,8 @@ RUN wget ${TL_MIRROR}/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tlmgr update --self --all --no-auto-install && \
     tlmgr path add
 
-# clone repo & compile
-RUN git clone https://github.com/TJ-CSCCG/tongji-undergrad-thesis.git && \
-    cd tongji-undergrad-thesis && \
-    latexmk -xelatex -interaction=nonstopmode -file-line-error -halt-on-error -shell-escape main
+# create folder to compile document
+RUN mkdir tongji-undergrad-thesis
+WORKDIR ${WRITE_ENV}
 
 CMD [ "/bin/bash" ]

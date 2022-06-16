@@ -15,14 +15,15 @@ WORKDIR /opt
 # install necessary packages
 # thank sjtug & tuna
 RUN sed -i 's/http:\/\/archive.ubuntu.com/http:\/\/mirror.sjtu.edu.cn/g' /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get install -y git \
+    apt-get update
+RUN apt-get install -y git \
         perl \
         wget \
         libfontconfig \
         python3 \
         python3-pip && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 RUN pip install Pygments -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # install TeXLive

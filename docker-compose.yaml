@@ -2,6 +2,5 @@ version: '3'
 services:
   tut-env:
     container_name: tut-env
-    image: tut-env:v1
-    build: .
+    image: skyleaworlder/tut-env:v1
     tty: true

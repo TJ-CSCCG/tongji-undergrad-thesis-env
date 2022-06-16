@@ -22,33 +22,35 @@
 
 ### 3. 构建镜像 & 运行容器
 
-注：视网络情况，首次构建镜像可能需要 12 min 左右；容器体积约为 974 MB。
-
 #### i. docker compose (recommand)
 
 ```shell
-> docker compose build # you can still use compose v1 by docker-compose
-> docker compose up -d
+> docker compose up -d # you can still use compose v1 by docker-compose
 ```
 
-#### ii. Docker
+镜像地址：https://hub.docker.com/repository/docker/skyleaworlder/tut-env
+
+#### ii. Docker（本地构建镜像）
 
 ```shell
 > docker build -t tut-env:v1 .
 > docker run -itd --name tut-env tut-env:v1
 ```
 
+注：视网络情况，首次构建镜像可能需要 12 min 左右；容器体积约为 974 MB。
+
 ### 4. 编译 LaTeX 文档
 
-容器内使用 XeLaTeX 编译文档。
+在宿主机的 thesis 工作目录执行 `compile` 指令：
 
 ```shell
-> # make sure that you are located at thesis path
+> # you are in Host OS now
+> # function "compile" will help you compile document in Container OS
 > cd <your-thesis-repository-path>
 > compile
 ```
 
-可以在宿主机执行 tlmgr-install 直接下载宏包到容器中：
+还可以在宿主机执行 tlmgr-install 将宏包直接下载到容器中：
 
 ```shell
 > # install algorithms and cases into container
@@ -59,3 +61,4 @@
 
 * 宿主机目前仅良好支持 Linux。
 * 非 Linux 用户可使用 VSCode 连接 Linux 服务器，并根据上述指引搭建环境。
+* 容器内使用 XeLaTeX 编译文档。

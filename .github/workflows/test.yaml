@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - master
+      - ci
+  pull_request:
+    branches:
+      - master
+
+name: test docker image
+
+jobs:
+  docker-compose:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: checkout
+        uses: actions/checkout@v2
+      - 
+        name: run container
+        run: |
+          docker compose up -d
+ 

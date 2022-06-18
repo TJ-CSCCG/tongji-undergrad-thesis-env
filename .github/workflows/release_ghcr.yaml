@@ -1,7 +1,11 @@
+# see https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
 on:
   push:
     branches:
+      - master
       - ci
+    paths:
+      - "Dockerfile"
 
 name: release to ghcr
 

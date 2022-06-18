@@ -6,7 +6,8 @@ on:
 name: release to ghcr
 
 env:
-  IMAGE_NAME: tut-env:v1
+  ORG_NAME: tj-csccg
+  IMAGE_TAG: tut-env:v1
 
 jobs:
   release_ghcr:
@@ -31,18 +32,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/TJ-CSCCG/${{ env.IMAGE_NAME }}
-      -
-        name: test meta output
-        run: |
-          echo ${{ github.actor }}
-          echo ${{ steps.meta.outputs.tags }}
-          echo ${{ steps.meta.outputs.labels }}
+          images: ghcr.io/${{ env.ORG_NAME }}/${{ env.IMAGE_TAG }}
       - 
         name: push image to ghcr
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ghcr.io/${{ env.ORG_NAME }}/${{ env.IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}

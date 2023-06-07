@@ -12,7 +12,7 @@ ENV TL_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/CTAN
 ENV TL_PROFILE_PATH=/tmp
 ENV TL_DIR=/tmp/texlive
 ENV TL_BIN=${TL_DIR}/bin/x86_64-linux
-ENV TL_PACKAGES="adjustbox algorithmicx algorithms caption cases chngcntr collectbox ctex enumitem environ extarrows fancybox fancyhdr float lastpage latexmk multirow needspace rsfs setspace subfigure tcolorbox texcount texliveonfly titling tocloft trimspaces ucs xcolor xecjk zhnumber gbt7714 natbib chinese-jfm catchfile fancyvrb framed fvextra ifplatform lineno minted pdftexcmds upquote xstring txfonts times biber biblatex bibtex dvips gsftopk"
+ENV TL_PACKAGES="adjustbox algorithmicx algorithms biber biblatex biblatex-gb7714-2015 bibtex booktabs caption carlisle cases catchfile chinese-jfm chngcntr cleveref collectbox ctex dvips enumitem environ extarrows fancybox fancyhdr fancyvrb float framed fvextra gbt7714 gsftopk helvetic hologo ifplatform lastpage latexmk lineno minted multirow mwe natbib needspace newtx nth oberdiek pdftexcmds realscripts rsfs setspace siunitx subfig tcolorbox texcount texliveonfly threeparttable threeparttablex times titling tocloft trimspaces txfonts ucs upquote was xcolor xecjk xstring zhnumber"
 ENV PATH=${PATH}:${TL_BIN}
 WORKDIR /opt
 

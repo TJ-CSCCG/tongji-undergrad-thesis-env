@@ -10,6 +10,8 @@ function compile() {
     cid=$(get-cid)
     echo $cid
     sudo docker cp $(pwd) "${cid}:${BASE}"
+    wd=$(basename $(pwd))
+    sudo docker exec -i ${cid} bash -c "mv ${BASE}/${wd}/* ${BASE}/${wd}/.* ${WRITE_ENV}"
     sudo docker exec -i ${cid} bash -c "cd ${WRITE_ENV} && ${COMPILE_CMD}"
     sudo docker cp "${cid}:${WRITE_ENV}/main.pdf" $(pwd)
 }

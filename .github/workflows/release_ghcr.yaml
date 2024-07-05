@@ -3,9 +3,10 @@ on:
   push:
     branches:
       - master
-      - ci
+      - 'ci/*'
     paths:
       - "Dockerfile"
+  workflow_dispatch:
 
 name: release to ghcr
 
